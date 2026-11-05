@@ -32,6 +32,9 @@ from app.api.v1.endpoints.follow_up_escalations import (
 from app.api.v1.endpoints.worker_dashboard import (
     router as worker_dashboard_router,
 )
+from app.api.v1.endpoints.worker_schedule import (
+    router as worker_schedule_router,
+)
 
 
 api_router = APIRouter()
@@ -129,6 +132,12 @@ api_router.include_router(
 
 api_router.include_router(
     worker_dashboard_router,
+)
+
+api_router.include_router(
+    worker_schedule_router,
+    prefix="/workers/me/schedule",
+    tags=["Worker Care Schedule"],
 )
 
 api_router.include_router(

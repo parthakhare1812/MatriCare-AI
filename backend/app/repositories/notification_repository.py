@@ -179,6 +179,18 @@ def get_all_notifications(
     }
 
 
+def get_unread_notification_count(
+    db: Session,
+) -> int:
+    statement = (
+        select(func.count())
+        .select_from(Notification)
+        .where(Notification.is_read.is_(False))
+    )
+
+    return db.scalar(statement) or 0
+
+
 def get_notification_by_task_and_type(
     db: Session,
     task_id: UUID,

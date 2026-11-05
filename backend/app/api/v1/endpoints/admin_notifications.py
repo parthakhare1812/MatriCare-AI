@@ -35,6 +35,22 @@ def list_all_notifications(
 
 
 @router.get(
+    "/unread-count",
+)
+def get_unread_notification_count(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_admin),
+):
+    unread_count = (
+        notification_service.get_unread_notification_count_for_admin(db)
+    )
+
+    return {
+        "unread_count": unread_count,
+    }
+
+
+@router.get(
     "/{notification_id}",
     response_model=NotificationResponse,
 )

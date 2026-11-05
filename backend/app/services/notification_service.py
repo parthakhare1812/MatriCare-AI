@@ -112,3 +112,9 @@ def get_notification_for_admin(
         db,
         notification_id,
     )
+
+
+def get_unread_notification_count_for_admin(
+    db: Session,
+) -> int:
+    return notification_repository.get_unread_notification_count(db)

@@ -201,6 +201,42 @@ def _get_activity_counts(
     }
 
 
+def _get_missed_activity_counts(
+    db: Session,
+    start_date: date,
+    end_date: date,
+    facility_ids: list[UUID] | None = None,
+) -> dict[date, int]:
+    statement = (
+        select(
+            FollowUpTask.due_date.label("activity_date"),
+            func.count(FollowUpTask.id).label("total"),
+        )
+        .where(
+            FollowUpTask.task_status == "missed",
+            FollowUpTask.due_date >= start_date,
+            FollowUpTask.due_date < end_date,
+        )
+    )
+
+    if facility_ids is not None:
+        if not facility_ids:
+            return {}
+
+        statement = statement.where(
+            FollowUpTask.facility_id.in_(facility_ids)
+        )
+
+    statement = statement.group_by(FollowUpTask.due_date)
+
+    rows = db.execute(statement).all()
+
+    return {
+        row.activity_date: row.total
+        for row in rows
+    }
+
+
 def get_follow_up_trends(
     db: Session,
     facility_ids: list[UUID] | None = None,
@@ -244,11 +280,10 @@ def get_follow_up_trends(
         facility_ids,
     )
 
-    missed_counts = _get_activity_counts(
+    missed_counts = _get_missed_activity_counts(
         db,
-        FollowUpTask.missed_at,
-        start_datetime,
-        end_datetime,
+        start_date,
+        end_date,
         facility_ids,
     )
 

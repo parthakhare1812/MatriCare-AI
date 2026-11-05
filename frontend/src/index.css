@@ -1,0 +1,259 @@
+
+@import "tailwindcss";
+
+/* =========================================================
+   MATRICARE AI — DESIGN TOKENS
+========================================================= */
+
+@theme {
+  --font-sans: "Inter", "Segoe UI", sans-serif;
+
+  --color-brand-50: #e8f5f3;
+  --color-brand-100: #cce9e5;
+  --color-brand-200: #a1d7d0;
+  --color-brand-300: #70bdb5;
+  --color-brand-400: #3d9f99;
+  --color-brand-500: #087f8c;
+  --color-brand-600: #076d78;
+  --color-brand-700: #075a63;
+  --color-brand-800: #164e50;
+  --color-brand-900: #103c3e;
+
+  --color-canvas: #f6f8fa;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f1f5f7;
+
+  --color-ink: #243746;
+  --color-ink-secondary: #647783;
+  --color-ink-muted: #91a0a9;
+
+  --color-success: #239b78;
+  --color-success-soft: #e7f5ef;
+
+  --color-warning: #d49b36;
+  --color-warning-soft: #fff5df;
+
+  --color-danger: #d76b75;
+  --color-danger-soft: #fff0f1;
+
+  --color-info: #5286c6;
+  --color-info-soft: #edf4fc;
+
+  --radius-card: 1rem;
+  --radius-control: 0.75rem;
+}
+
+/* =========================================================
+   GLOBAL RESET
+========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  min-width: 360px;
+  min-height: 100vh;
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: "Inter", "Segoe UI", sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  color: #ffffff;
+  background: #087f8c;
+}
+
+/* =========================================================
+   SCROLLBARS
+========================================================= */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd7dc transparent;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd7dc;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9aafb7;
+}
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+:focus-visible {
+  outline: 3px solid rgb(8 127 140 / 25%);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* =========================================================
+   SHARED COMPONENT STYLES
+========================================================= */
+
+.mc-card {
+  background: var(--color-surface);
+  border: 1px solid #e9eef0;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgb(30 55 65 / 3%);
+}
+
+.mc-card-hover {
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+
+.mc-card-hover:hover {
+  transform: translateY(-2px);
+  border-color: #cce4e1;
+  box-shadow: 0 10px 28px rgb(30 55 65 / 7%);
+}
+
+.mc-page-container {
+  width: 100%;
+  max-width: 1600px;
+  margin-inline: auto;
+  padding: 28px;
+}
+
+.mc-muted {
+  color: var(--color-ink-secondary);
+}
+
+.mc-divider {
+  height: 1px;
+  border: 0;
+  background: #edf1f3;
+}
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes mc-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mc-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes mc-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.55;
+  }
+}
+
+.animate-fade-in {
+  animation: mc-fade-in 350ms ease both;
+}
+
+.animate-slide-in {
+  animation: mc-slide-in 250ms ease both;
+}
+
+.animate-pulse-soft {
+  animation: mc-pulse 1.8s ease-in-out infinite;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 768px) {
+  .mc-page-container {
+    padding: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    min-width: 320px;
+  }
+
+  .mc-page-container {
+    padding: 14px;
+  }
+}
