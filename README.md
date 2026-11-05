@@ -1,4 +1,4 @@
-# 🤱 MatriCare AI
+#  MatriCare AI
 ### Closing the Maternal Care Follow-up Loop
 
 **MatriCare AI** is a full-stack maternal healthcare management platform designed to improve continuity of care through structured patient management, pregnancy tracking, antenatal visit records, follow-up task management, escalation workflows, and real-time operational visibility.
